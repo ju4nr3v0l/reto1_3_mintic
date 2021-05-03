@@ -1,4 +1,4 @@
-def calcularPago(empleado: dict):
+def calcularPago(empleado: dict)->str:
     horasTotales = calcularHorasyExtras(empleado['horas'])
     valorHorasNormales = horasTotales['normales'] * 3785.00
     valorHorasExtas = horasTotales['extras'] * 4731.00

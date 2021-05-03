@@ -10,7 +10,4 @@ def comenzar():
     empleado['boni'] = funciones.solicitarBonificacion()
     funciones.calcularPago(empleado)
 
-
-
-
 comenzar()
