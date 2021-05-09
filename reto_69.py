@@ -5,17 +5,19 @@
 #-salud y pensión mensual: 258927/30
 
 
-def calcularSalario(empleado:dict)->dict:
+def calcularPago(empleado:dict)->dict:
     horasExtras =  empleado['horas'] - 8
     horasNormales = empleado['horas'] - horasExtras
+    if horasExtras < 0:
+        horasExtras = 0
+        horasNormales = empleado['horas']
     valorPagar = horasExtras*4731 + horasNormales*3785
     auxTransporteDia = 106454/30
     saludPensionDia = 258927/30
     totalPagar = (valorPagar + auxTransporteDia + empleado['boni']) - saludPensionDia
     totalPagar = round(totalPagar,2)
-    print(f"El empleado  {empleado['nombre']} total a pagar ${totalPagar}")
+    return f"El empleado {empleado['nombre']} total a pagar {totalPagar}"
 
+empleado = {"nombre": "Ricardo","horas": 6,"boni":0 }
 
-
-empleado = {"nombre": "Ricardo","horas": 10,"boni": 200000}
-calcularSalario(empleado)
+calcularPago(empleado)
