@@ -1,0 +1,63 @@
+#0=No tiene síntomas
+#1=Presencia de síntomas
+def diagSintoma(paciente:dict)->dict:
+    enfermedad = 0
+    if paciente['diag_ta'] == 'Si':
+        if paciente['diag_pa'] == 'Si':
+            if paciente['diag_do'] == 'Si':
+                if paciente['diag_dg'] == 'Si':
+                    if paciente['diag_ca'] == 'Si':
+                        enfermedad = 'Malaria'
+                    else:
+                        enfermedad = 1
+                else:
+                    enfermedad = 1
+            else:
+                enfermedad = 1
+        else:
+            if paciente['diag_do'] == 'Si':
+                enfermedad = 1
+            else:
+                if paciente['diag_dg'] == 'Si':
+                    if paciente['diag_ca'] == 'Si':
+                        enfermedad = 'Gripa'
+                    else:
+                        enfermedad = 1
+                else:
+                    enfermedad = 1
+    else:
+        if paciente['diag_pa'] == 'Si':
+            if paciente['diag_do'] == 'Si':
+                if paciente['diag_dg'] == 'Si':
+                    if paciente['diag_ca'] == 'Si':
+                        enfermedad = 1
+                    else:
+                        enfermedad = 'Otitis'
+                else:
+                    enfermedad = 1
+            else:
+                enfermedad = 1
+
+        else:
+            if paciente['diag_do'] == 'Si' or paciente['diag_dg'] == 'Si' or paciente['diag_ca'] == 'Si':
+                enfermedad = 1
+            else:
+                enfermedad = 0
+
+    if isinstance(enfermedad,int):
+        estado = False
+        if enfermedad == 0:
+            enfermedad = 'No tiene síntomas'
+        else:
+             enfermedad = 'Presencia de síntomas'
+    else:
+        estado = True
+
+    return {'id_diagnostico':paciente['id_diagnostico'],'resultado':enfermedad,'estado': estado}
+
+#{'id_diagnostico':'d-001','diag_ta':'Si','diag_pa':'No','diag_do':'No','diag_dg':'Si','diag_ca':'Si'}
+#{'id_diagnostico':'d-002','diag_ta':'Si','diag_pa':'No','diag_do':'No','diag_dg':'No','diag_ca':'No'}
+#{'id_diagnostico':'d-003','diag_ta':'No','diag_pa':'No','diag_do':'No','diag_dg':'No','diag_ca':'No'}
+print(diagSintoma({'id_diagnostico':'d-001','diag_ta':'Si','diag_pa':'No','diag_do':'No','diag_dg':'Si','diag_ca':'Si'}))
+print(diagSintoma({'id_diagnostico':'d-002','diag_ta':'Si','diag_pa':'No','diag_do':'No','diag_dg':'No','diag_ca':'No'}))
+print(diagSintoma({'id_diagnostico':'d-003','diag_ta':'No','diag_pa':'No','diag_do':'No','diag_dg':'No','diag_ca':'No'}))
